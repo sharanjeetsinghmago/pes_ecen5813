@@ -13,7 +13,9 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
+#include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 /**
  * @brief Moves the data from source to destination

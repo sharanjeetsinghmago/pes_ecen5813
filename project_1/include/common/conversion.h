@@ -10,8 +10,8 @@
 *
 */
 
-#ifndef __MEMORY_H__
-#define __MEMORY_H__
+#ifndef __CONVERSION_H__
+#define __CONVERSION_H__
 
 #include <stdint.h>
 
@@ -74,4 +74,4 @@ int8_t big_to_little32(uint32_t * data, uint32_t length);
 int8_t little_to_big32(uint32_t * data, uint32_t length);
 
 
-#endif /* __MEMORY_H__ */
+#endif /* __CONVERSION_H__ */
