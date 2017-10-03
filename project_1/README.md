@@ -7,6 +7,7 @@ Author: Vipul Gupta
 Project: Project 1 - Build Systems and C Prohgramming Practice
 
 Members: 1. Vipul Gupta (vipul.gupta@colorado.edu)
+
 	 2. Sharanjeet Mago (sharanjeet.mago@colorado.edu)
 
 Description: The project conatins functions for manipulating memory data
