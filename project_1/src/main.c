@@ -14,8 +14,8 @@
 int main(void)
 {
 
-	#ifdef PROJECT1
-		project1();
-	#endif
+#ifdef PROJECT1
+	project1();
+#endif
 
 }

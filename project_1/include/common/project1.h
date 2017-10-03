@@ -23,7 +23,7 @@
 
 #define DATA_SET_SIZE_W (10)
 #define MEM_SET_SIZE_B  (32)
-#define MEM_SET_SIZE_W  (8)
+#define MEM_SET_SIZE_W  (32)
 #define MEM_ZERO_LENGTH (16)
 
 #define TEST_MEMMOVE_LENGTH (16)

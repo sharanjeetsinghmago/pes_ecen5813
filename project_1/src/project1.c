@@ -24,6 +24,12 @@
 #include "memory.h"
 #include "conversion.h"
 
+void project1(void)
+{
+  // Test function calls
+}
+
+
 int8_t test_data1() {
   uint8_t * ptr;
   int32_t num = -4096;
