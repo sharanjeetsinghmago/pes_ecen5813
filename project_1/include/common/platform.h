@@ -15,15 +15,18 @@
 
 /* PLATFORM KL25Z (Freedom board) */
 #if defined (KL25Z)
-#include "MKL25Z4.h"
-#define printf(...)
+	#include "MKL25Z4.h"
+	//#define printf(...)
+#endif
+
 
 /* PLATFORM BBB (Beagle Bone Black) */
-#elif defined (BBB)
+//#elif defined (BBB)
 //
 
 /* PLATFORM HOST */
-#else
+//#else
 //
+
 
 #endif  /* __PLATFORM_H__ */

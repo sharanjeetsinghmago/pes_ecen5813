@@ -17,11 +17,16 @@ void print_memory(uint8_t * start, uint32_t length)
 	/* Compile time switch: Flag VERBOSE */
 #ifdef VERBOSE
 	uint32_t i;
-	printf("=============\n");
+	printf("=========================================================\n");
 	for(i = 0; i < length; i++)
 	{
-		printf(" %x \n", *(start+i));
+		printf("%2d -> %2x\t", i,*(start+i));
+		if((i+1)%4 == 0)
+		{
+			printf("\n");
+		}
 	}
-	printf("=============\n");
+
+	printf("=========================================================\n");
 #endif
 }

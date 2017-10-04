@@ -33,6 +33,7 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length)
 			*(dst+i) = *(src+i);
 		}
 	}
+	return dst;
 }
 
 uint8_t * my_memcpy(uint8_t * src, uint8_t * dst, size_t length)
