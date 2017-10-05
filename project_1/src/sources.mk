@@ -11,7 +11,7 @@ SOURCES_K = main.c \
 			memory.c \
 			conversion.c \
 			debug.c \
-			system_MKL25Z4.c
+			system_MKL25Z4.c 
 
 INCLUDES = -I../include/common 
 

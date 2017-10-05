@@ -55,7 +55,6 @@ ifeq ($(PLATFORM), HOST)
 	DEPS = $(SOURCES:.c=.d)
 	#Berkely size format in decimal
 	SIZE = size -Bd
-	SOURCES_MODIFIED = %.c
 else
 	ifeq ($(PLATFORM),KL25Z)
 		CC = arm-none-eabi-gcc
@@ -65,10 +64,9 @@ else
 				 -mfpu=$(FPU) --specs=$(SPECS) $(INCLUDES_K)
 		CPPFLAGS = -DKL25Z -D$(PROJECT) -D$(PRINT)
 		LDFLAGS = -Wl,-Map=$(TARGET).map -T $(LINKER_FILE)
-		OBJECTS = $(SOURCES_K:.c=.o) $(ASSB_FILE).o
-		DEPS = $(SOURCES_K:.c=.o)
+		OBJECTS = $(SOURCES_K:.c=.o) startup_MKL25Z4.o
+		DEPS = $(SOURCES_K:.c=.d) 
 		SIZE = arm-none-eabi-size -Bd
-		SOURCES_MODIFIED = %.c $(ASSB_FILE).s
 
 	else
 		CC = arm-linux-gnueabi-gcc
@@ -79,7 +77,6 @@ else
 		OBJECTS = $(SOURCES:.c=.o)
 		DEPS = $(SOURCES:.c=.d)
 		SIZE = arm-linux-gnueabi-size -Bd
-		SOURCES_MODIFIED = %.c
 
 	endif
 endif
@@ -95,9 +92,9 @@ endif
 	$(CC) $(CFLAGS) $(CPPFLAGS) -S $< -o $@
 
 # Output files
-%.o : $(SOURCES_MODIFIED) 
+%.o : %.c 
 	@echo "GENERATING OBJECT FILE..."
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $^ -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # Dependency files
 %.d : %.c

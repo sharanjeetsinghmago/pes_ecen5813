@@ -15,7 +15,7 @@
 void print_memory(uint8_t * start, uint32_t length)
 {
 	/* Compile time switch: Flag VERBOSE */
-#ifdef VERBOSE
+#if defined (VERBOSE) && !defined (KL25Z)
 	uint32_t i;
 	printf("=========================================================\n");
 	for(i = 0; i < length; i++)
