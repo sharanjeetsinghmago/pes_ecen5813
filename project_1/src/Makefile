@@ -55,6 +55,7 @@ ifeq ($(PLATFORM), HOST)
 	DEPS = $(SOURCES:.c=.d)
 	#Berkely size format in decimal
 	SIZE = size -Bd
+	LIB_OBJS = $(LIB_SRCS:.c=.o)
 else
 	ifeq ($(PLATFORM),KL25Z)
 		CC = arm-none-eabi-gcc
@@ -67,6 +68,7 @@ else
 		OBJECTS = $(SOURCES_K:.c=.o) startup_MKL25Z4.o
 		DEPS = $(SOURCES_K:.c=.d) 
 		SIZE = arm-none-eabi-size -Bd
+		LIB_OBJS = $(LIB_SRCS_K:.c=.o)
 
 	else
 		CC = arm-linux-gnueabi-gcc
@@ -77,6 +79,7 @@ else
 		OBJECTS = $(SOURCES:.c=.o)
 		DEPS = $(SOURCES:.c=.d)
 		SIZE = arm-linux-gnueabi-size -Bd
+		LIB_OBJS = $(LIB_SRCS:.c=.o)
 
 	endif
 endif
@@ -114,6 +117,8 @@ build : $(OBJECTS) $(DEPS)
 	@echo ""
 	@echo "LINKING AND GENERATING FINAL EXECUTABLE..."
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJECTS) -o $(TARGET).elf
+	@echo "BUILDING ARCHIVE FILE"
+	ar rc lib$(TARGET).a $(LIB_OBJS)
 	@echo ""
 	@echo "-------------------------------------------------------"
 	@echo "   BUILD REPORT OF CODE SIZE (BYTES)"
@@ -124,7 +129,7 @@ build : $(OBJECTS) $(DEPS)
 
 # Remove generated files
 clean : 
-	rm -rf $(TARGET).elf  $(TARGET).map *.o *.asm *.i *.d
+	rm -rf $(TARGET).elf  $(TARGET).map *.o *.asm *.i *.d *.a
 	@echo "GENERATED FILES REMOVED..."
 
 
