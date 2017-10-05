@@ -97,7 +97,7 @@ int8_t big_to_little32(uint32_t * data, uint32_t length)
 {
     uint32_t i,t1,t2;
 
-    if(  length << 0 || length%2==1 )     
+    if(  length <= 0 || length%2==1 )     
     {
         return 1;                // return 1 when conversion is not successful
     }
@@ -125,7 +125,7 @@ int8_t little_to_big32(uint32_t * data, uint32_t length)
 {
     uint32_t i,t1,t2;
 
-    if(  length << 0 || length%2==1 )
+    if(  length <= 0 || length%2==1 )
     {
         return 1;             // return 1 when conversion is not successful
     }

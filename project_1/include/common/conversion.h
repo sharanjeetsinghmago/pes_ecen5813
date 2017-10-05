@@ -55,7 +55,7 @@ int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base);
 * @param data Pointer to the input data
 * @param length Size of the data
 *
-* @return Error if conversion fails
+* @return Converted data or error if conversion fails
 */
 int8_t big_to_little32(uint32_t * data, uint32_t length);
 
@@ -69,7 +69,7 @@ int8_t big_to_little32(uint32_t * data, uint32_t length);
 * @param data Pointer to the input data
 * @param length Size of the data
 *
-* @return Error if conversion fails
+* @return Converted data or error if conversion fails
 */
 int8_t little_to_big32(uint32_t * data, uint32_t length);
 
