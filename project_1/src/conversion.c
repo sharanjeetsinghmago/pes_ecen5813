@@ -16,7 +16,7 @@
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 {
     int32_t r,i=0,flag=0;
-	char var,temp;
+    char var,temp;
     uint8_t len;
 
     if(data == 0)
@@ -35,7 +35,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 
     while (data != 0)
     {
-        int r = data % base;
+        r = data % base;
         var = (r>9) ? (r-10)+'a' : r+'0';
         *(ptr+i) = var;
         data = data / base;
