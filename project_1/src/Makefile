@@ -113,7 +113,7 @@ compile-all : $(OBJECTS)
 build : $(OBJECTS) $(DEPS)
 	@echo ""
 	@echo "LINKING AND GENERATING FINAL EXECUTABLE..."
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $(TARGET).elf
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJECTS) -o $(TARGET).elf
 	@echo ""
 	@echo "-------------------------------------------------------"
 	@echo "   BUILD REPORT OF CODE SIZE (BYTES)"

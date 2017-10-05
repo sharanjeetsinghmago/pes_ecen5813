@@ -15,7 +15,7 @@
 
 /* PLATFORM KL25Z (Freedom board) */
 #if defined (KL25Z)
-	//#include "MKL25Z4.h"
+	#include "MKL25Z4.h"
 	#define printf(...)
 #endif
 

@@ -19,6 +19,6 @@ INCLUDES_K = -I../include/common \
 			 -I../include/CMSIS \
 			 -I../include/kl25z
 
-ASSB_FILE = startup_MKL25Z4
+
 
 
