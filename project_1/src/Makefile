@@ -66,7 +66,7 @@ else
 		CPPFLAGS = -DKL25Z -D$(PROJECT) -D$(PRINT)
 		LDFLAGS = -Wl,-Map=$(TARGET).map -T $(LINKER_FILE)
 		OBJECTS = $(SOURCES_K:.c=.o) startup_MKL25Z4.o
-		DEPS = $(SOURCES_K:.c=.d) 
+		DEPS = $(SOURCES_K:.c=.d) startup_MKL25Z4.d
 		SIZE = arm-none-eabi-size -Bd
 		LIB_OBJS = $(LIB_SRCS_K:.c=.o)
 
@@ -99,10 +99,18 @@ endif
 	@echo "GENERATING OBJECT FILE..."
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
+%.o : %.S
+	@echo "GENERATING OBJECT FILE..."
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
 # Dependency files
 %.d : %.c
 	@echo "GENERATING DEPENDENCY FILE..."
-	$(CC) $(CFLAGS) $(CPPFLAGS) -M $< -o $@ 
+	$(CC) $(CFLAGS) $(CPPFLAGS) -M $< -o $@
+
+%.d : %.S
+	@echo "GENERATING DEPENDENCY FILE..."
+	$(CC) $(CFLAGS) $(CPPFLAGS) -M $< -o $@
 
 # PHONY protection
 .PHONY : compile-all build clean
