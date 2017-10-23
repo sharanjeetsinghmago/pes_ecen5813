@@ -19,7 +19,7 @@ CB_status CB_buffer_add_item(CB_t * buff, uint8_t data)
 	if(buff == NULL)
 		return null_pointer;
 	/* If head is one less than tail => buffer full */
-	else if (buff->count == (buff->length - 1))
+	else if (buff->count == buff->length)
 		return buffer_full;
 	else
 	{
@@ -32,10 +32,7 @@ CB_status CB_buffer_add_item(CB_t * buff, uint8_t data)
 		else
 			(buff->head) += 1;
 		/* update count */
-		if(((buff->head) - (buff->tail)) >= 0)
-			buff->count = (buff->head - buff->tail);
-		else
-			buff->count = buff->length + (buff->head - buff->tail);
+		buff->count += 1;
 
 		return success;
 	}
@@ -46,7 +43,7 @@ CB_status CB_buffer_remove_item(CB_t * buff, uint8_t * data)
 	if(buff == NULL)
 		return null_pointer;
 	/* If head = tail => buffer empty */
-	else if (buff->head == buff->tail)
+	else if (buff->count == 0)
 		return buffer_empty;
 	else
 	{
@@ -59,10 +56,7 @@ CB_status CB_buffer_remove_item(CB_t * buff, uint8_t * data)
 		else
 			(buff->tail) += 1;
 		/* update count */
-		if(((buff->head) - (buff->tail)) >= 0)
-			buff->count = (buff->head - buff->tail);
-		else
-			buff->count = buff->length + (buff->head - buff->tail);
+		buff->count -= 1;
 
 		return success;
 	}
@@ -73,7 +67,7 @@ CB_status CB_is_full(CB_t * buff)
 	if(buff == NULL)
 		return null_pointer;
 	/* If head is one less than tail => buffer full */
-	else if (buff->count == (buff->length - 1))
+	else if (buff->count == buff->length)
 		return buffer_full;
 	else
 		return success;
@@ -84,7 +78,7 @@ CB_status CB_is_empty(CB_t * buff)
 	if(buff == NULL)
 		return null_pointer;
 	/* If head = tail => buffer empty */
-	else if (buff->head == buff->tail)
+	else if (buff->count == 0)
 		return buffer_empty;
 	else
 		return success;
@@ -94,18 +88,20 @@ CB_status CB_peek(CB_t * buff, size_t position, uint8_t * data)
 {
 	if(buff == NULL)
 		return null_pointer;
+	else if(buff->count == 0)
+		return buffer_empty;
 	else if(position >= buff->count)
 		return out_of_count;
 	else
 	{
 		/* Head is above the tail (Not wrapped around) */
-		if(((buff->head) - (buff->tail)) >= 0)
+		if(((buff->head) - (buff->tail)) > 0)
 		{
 			*data = *((buff->head - position - 1));
 			return success;
 		}
 
-		else /* Head is below tail (Wrapped around) */
+		else /* Head is below or equal to tail (Wrapped around) */
 		{
 			if((buff->head - position - 1) >= buff->ptr)
 				*data = *(buff->head - position - 1);
