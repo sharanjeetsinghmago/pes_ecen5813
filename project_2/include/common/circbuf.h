@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 
 /**
@@ -25,11 +26,11 @@
  */
 typedef struct CB_t
 {
-	CB_t * buffer_ptr;			/* Allocated memory pointer */
-	uint8_t * head;				/* Pointer to newest item */
-	uint8_t * tail;				/* Pointer to oldest item */
-	size_t * buff_length;		/* Number of items allocated to the buffer */
-	size_t * buff_count;		/* Current item count in the buffer */
+	uint8_t * ptr;				/* Allocated memory pointer */
+	uint8_t * head;				/* Pointer to add data item */
+	uint8_t * tail;				/* Pointer to remove data item */
+	size_t length;		    	/* Number of items allocated to the buffer */
+	size_t count;		    	/* Current item count in the buffer */
 
 } CB_t;
 
@@ -41,12 +42,13 @@ typedef struct CB_t
  */
 typedef enum CB_status
 {
-	no_error = 0,                       /* No error or Success */
+	success = 0,                        /* No error or Success */
     buffer_full = 1,                    /* Buffer is full */
     buffer_empty = 2,                   /* Buffer is empty */
     null_pointer = 3,                   /* Returned a null pointer */
     no_length = 4,                      /* No length returned */
-    allocation_failed = 5        		/* buffer allocation failed */	
+    allocation_failed = 5,        		/* buffer allocation failed */
+    out_of_count = 6					/* Data access greater then count */
 
 } CB_status;
 
@@ -68,16 +70,16 @@ CB_status CB_buffer_add_item(CB_t * buff, uint8_t data);
 /**
  * @brief Remove the data item to the circular buffer
  *
- * Given the pointer to the circular buffer and the data to removed,
- * it removes the data item to the circular buffer and returns an 
- * enumeration that specifies the status condition of the function call.
+ * Given the pointer to the circular buffer and the pointer to the data
+ * to removed, it removes the data item to the circular buffer and returns
+ * an enumeration that specifies the status condition of the function call.
  *
  * @param buff Pointer to the circular buffer
- * @param data Variable to store the removed data
+ * @param data Pointer to the variable to store the removed data
  *
  * @return Status condition of the function call
  */
-CB_status CB_buffer_remove_item(CB_t * buff, uint8_t data);
+CB_status CB_buffer_remove_item(CB_t * buff, uint8_t * data);
 
 /**
  * @brief To check whether the circular buffer is full
@@ -112,6 +114,7 @@ CB_status CB_is_empty(CB_t * buff);
  * the buffer to peek into and the pointer to the data, it stores the
  * data being peeked and returns an enumeration that specifies the status
  * condition of the circular buffer or an error code.
+ * Position 0 corresponds to the newest element.
  *
  * @param buff Pointer to the circular buffer
  * @param position Position from the head of the buffer to peek into 
