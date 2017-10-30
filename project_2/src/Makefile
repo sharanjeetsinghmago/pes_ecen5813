@@ -22,10 +22,10 @@
 include sources.mk
 
 # Project call macro
-PROJECT = PROJECT1
+PROJECT = PROJECT2
 
 # Target filename
-TARGET = project1
+TARGET = project2
 
 # Debug print macro
 # To enable - define VERBOSE
@@ -60,7 +60,7 @@ else
 	ifeq ($(PLATFORM),KL25Z)
 		CC = arm-none-eabi-gcc
 		LD = arm-none-eabi-ld
-		CFLAGS = -Wall -Werror -g -O0 -std=c99 -mcpu=$(CPU) \
+		CFLAGS = -Wall -g -O0 -std=c99 -mcpu=$(CPU) \
 				 -mthumb -march=$(ARCH) -mfloat-abi=$(FLOAT_ABI) \
 				 -mfpu=$(FPU) --specs=$(SPECS) $(INCLUDES_K)
 		CPPFLAGS = -DKL25Z -D$(PROJECT) -D$(PRINT)

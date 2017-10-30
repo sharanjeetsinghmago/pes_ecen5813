@@ -1,6 +1,6 @@
 /**
  * @file uart.h
- * @brief An abtraction uart driver functions 
+ * @brief An abtraction uart driver functions
  *
  * This header file provides the prototypes of function for
  * implementing uart driver for the KL25Z platform.
@@ -13,19 +13,38 @@
 #ifndef __UART_H__
 #define __UART_H__
 
-#include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "MKL25Z4.h"
 
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+
+#define BAUD_RATE			(115200)	/* Baud Rate (115200, 57600, 38400) */
+#define BAUD_CLOCK			(48000000)	/* System Clock 48 Mhz */
+#define OSR					(15)		/* Over sampling Rate 16x default */
+
+
+
+/*******************************************************************************
+ * Variables
+ ******************************************************************************/
 
 typedef enum uart_t
 {
-	success = 0,		/* Success */
-	null_pointer = 1,	/* Null pointer returned */
-	no_length = 2,		/* No length parameter */
-	config_fail = 3,	/* Configuration failed */
-	
+	uart_success = 0,		/* Success */
+	uart_null_pointer = 1,	/* Null pointer returned */
+	uart_no_length = 2,		/* No length parameter */
+	uart_config_fail = 3,	/* Configuration failed */
+
 } UART_status;
 
+
+/*******************************************************************************
+ * Prototypes
+ ******************************************************************************/
 
 /**
  * @brief Configure the UART as per the decided BAUD rate
@@ -83,7 +102,7 @@ UART_status UART_receive(uint8_t * data);
  *
  * Given the pointer to a contiguous block of data items to receive,
  * it receives the block of data on a specific UART device and
- * returns an enumeration that specifies the status condition of 
+ * returns an enumeration that specifies the status condition of
  * the function call.
  *
  * @param data Pointer to the block of data
@@ -100,5 +119,6 @@ UART_status UART_receive_n(uint8_t * data, size_t length);
  *
  */
 void UART0_IRQHandler(void);
+
 
 #endif 	/* __CIRCBUF_H__ */
