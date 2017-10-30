@@ -13,6 +13,12 @@
 #ifndef __CONVERSION_H__
 #define __CONVERSION_H__
 
+typedef enum
+{
+  INVALID_POINTER_EQUALS_NULL,
+  VALID_CONVERSION
+}conv_status;
+
 #include <stdint.h>
 
 /**
@@ -57,7 +63,7 @@ int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base);
 *
 * @return Converted data or error if conversion fails
 */
-int8_t big_to_little32(uint32_t * data, uint32_t length);
+conv_status big_to_little32(uint32_t * data, uint32_t length);
 
 /**
 * @brief Convert from little endian to big endian
@@ -71,7 +77,7 @@ int8_t big_to_little32(uint32_t * data, uint32_t length);
 *
 * @return Converted data or error if conversion fails
 */
-int8_t little_to_big32(uint32_t * data, uint32_t length);
+conv_status little_to_big32(uint32_t * data, uint32_t length);
 
 
 #endif /* __CONVERSION_H__ */

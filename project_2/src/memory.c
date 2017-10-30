@@ -11,17 +11,15 @@
  */
 
 
-#include "memory.h"
+#include "../include/common/memory.h"
+#include <stdint.h>
 
 
-uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length)
+memory_status my_memmove(uint8_t * src, uint8_t * dst, size_t length)
 {
 	size_t i;
-	
 	if(src == NULL || dst == NULL)
-		return (uint8_t *)0;
-	else if(src == dst)
-		return dst;
+		return INVALID_POINTER_EQUALS_NULL;
 	else if(src < dst)
 	{
 		for(i = 1; i <= length; i++)
@@ -36,60 +34,62 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length)
 			*(dst+i) = *(src+i);
 		}
 	}
-	return dst;
+	return SUCCESS;
 }
 
-uint8_t * my_memcpy(uint8_t * src, uint8_t * dst, size_t length)
+memory_status my_memcpy(uint8_t * src, uint8_t * dst, size_t length)
 {
 	size_t i;
 
 	if(src == NULL || dst == NULL)
-		return (uint8_t *)0;
-	else if(src == dst)
-		return dst;
+		return INVALID_POINTER_EQUALS_NULL;
+
 	for(i = 0; i < length; i++)
 	{
 		*(dst+i) = *(src+i);
 	}
-	return dst;
+	return SUCCESS;
 }
 
-uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value)
+memory_status my_memset(uint8_t * src, size_t length, uint8_t value)
 {
-	size_t i;
-	if(src == NULL)
-		return (uint8_t *)0;
+        size_t i;
+	if(src == NULL )
+		return INVALID_POINTER_EQUALS_NULL;
 	else 
 	{
 		for(i = 0; i < length; i++)
 		{
 			*(src+i) = value;
 		}
-		return src;
 	}
+	return SUCCESS;
 }
 
-uint8_t * my_memzero(uint8_t * src, size_t length)
+memory_status my_memzero(uint8_t * src, size_t length)
 {
-	size_t i;
-	if(src == NULL)
-		return (uint8_t *)0;
+  	size_t i;
+	if(src == NULL )
+		return INVALID_POINTER_EQUALS_NULL;
+	
 	else
 	{
 		for(i = 0; i < length; i++)
 		{
 			*(src+i) = 0x00;
-		}
-		return src;
-	}	
+		}	
+	}
+	return SUCCESS;
 }
 
-uint8_t * my_reverse(uint8_t * src, size_t length)
+memory_status my_reverse(uint8_t * src, size_t length)
 {
 	size_t i;
 
 	if(src == NULL)
-		return (uint8_t *)0;
+		return INVALID_POINTER_EQUALS_NULL;
+	
+	
 	else
 	{
 		/* Allocating a byte of memory for tmp variable */
@@ -102,7 +102,7 @@ uint8_t * my_reverse(uint8_t * src, size_t length)
 			*(src + i) = *tmp;
 		}
 		free(tmp);
-		return src;
+		return SUCCESS;
 	}
 }
 

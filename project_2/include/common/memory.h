@@ -17,6 +17,12 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+typedef enum
+{
+  INVALID_POINTER_EQUALS_NULL,
+  SUCCESS
+}memory_status;
+
 /**
  * @brief Moves the data from source to destination
  *
@@ -30,7 +36,7 @@
  *
  * @return Pointer to the destination
  */
-uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
+memory_status my_memmove(uint8_t * src, uint8_t * dst, size_t length);
 
 /**
  * @brief Copies the data from source to destination
@@ -45,7 +51,7 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
  *
  * @return Pointer to the destination
  */
-uint8_t * my_memcpy(uint8_t * src, uint8_t * dst, size_t length);
+memory_status my_memcpy(uint8_t * src, uint8_t * dst, size_t length);
 
 /**
  * @brief Sets the value of the data 
@@ -60,7 +66,7 @@ uint8_t * my_memcpy(uint8_t * src, uint8_t * dst, size_t length);
  *
  * @return Pointer to the source
  */
-uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value);
+memory_status my_memset(uint8_t * src, size_t length, uint8_t value);
 
 /**
  * @brief Sets the value of the data as zero
@@ -74,7 +80,7 @@ uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value);
  *
  * @return Pointer to the source
  */
-uint8_t * my_memzero(uint8_t * src, size_t length);
+memory_status my_memzero(uint8_t * src, size_t length);
 
 /**
  * @brief Reverse the order of all the bytes
@@ -88,7 +94,7 @@ uint8_t * my_memzero(uint8_t * src, size_t length);
  *
  * @return Pointer to the source
  */
-uint8_t * my_reverse(uint8_t * src, size_t length);
+memory_status my_reverse(uint8_t * src, size_t length);
 
 /**
  * @brief Allocate data in dynamic memory

@@ -135,7 +135,7 @@ int main(int argc, char **argv)
   cmocka_unit_test(test_pointer_equal_NULL4),
   cmocka_unit_test(CHECK_EVEN),
   cmocka_unit_test(CHECK_ODD),
- cmocka_unit_test(CHECK_CHAR),
+ cmocka_unit_test(CHECK_CHAR)
   };
 
   return cmocka_run_group_tests(tests, NULL, NULL);

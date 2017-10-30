@@ -11,7 +11,7 @@
 */
 
 #include <stdio.h>
-#include "conversion.h"
+#include "../include/common/conversion.h"
 
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base)
 {
@@ -93,13 +93,13 @@ int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base)
     return result;
 }
 
-int8_t big_to_little32(uint32_t * data, uint32_t length)
+conv_status big_to_little32(uint32_t * data, uint32_t length)
 {
     uint32_t i,t1,t2;
 
-    if(  length <= 0 || length%2==1 )     
+    if(  length <= 0 || length%2==1 || data == NULL)     
     {
-        return 1;                // return 1 when conversion is not successful
+        return INVALID_POINTER_EQUALS_NULL;                // return 1 when conversion is not successful
     }
     else
     {
@@ -117,17 +117,17 @@ int8_t big_to_little32(uint32_t * data, uint32_t length)
 
             i=i+2;
         }
-        return 0;
+        return VALID_CONVERSION;
     }
 }
 
-int8_t little_to_big32(uint32_t * data, uint32_t length)
+conv_status little_to_big32(uint32_t * data, uint32_t length)
 {
     uint32_t i,t1,t2;
 
-    if(  length <= 0 || length%2==1 )
+    if(  data == NULL )
     {
-        return 1;             // return 1 when conversion is not successful
+        return INVALID_POINTER_EQUALS_NULL;             // return 1 when conversion is not successful
     }
     else
     {
@@ -145,6 +145,6 @@ int8_t little_to_big32(uint32_t * data, uint32_t length)
 
             i=i+2;
         }
-        return 0;
+        return VALID_CONVERSION;
     }
 }
