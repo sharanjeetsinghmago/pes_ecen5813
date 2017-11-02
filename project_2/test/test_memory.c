@@ -79,9 +79,8 @@ void test_CHECK_SET2(void **state)
 { 
   int8_t arr[32] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};
   uint8_t * src = arr;
-  uint8_t value = 11;
-  size_t length = 10;
-  memory_status status = my_memset(src,length,value);
+  size_t length = 20;
+  memory_status status = my_memzero(src,length);
   assert_int_equal(status,SUCCESS);
 }
 
